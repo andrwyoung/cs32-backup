@@ -1,0 +1,21 @@
+Andrew Yong
+604905807
+
+2) You can't use > on a Coord because it's a class, and there's no overloaded > operator. Therefore it fails
+
+4b) Recursion is useful in this problem because it breaks down the problem into subparts. But in order to list the full path, the function needs to have a list of the path it took. That can't happen with the one argument version because it will only know the next directories/files.
+
+5a) O(N^3) because there are 3 for loops that run pretty much everytime
+
+5b) Still O(N^3) because the there are still 3 for loops that run pretty much evertime, despite the second one running less times.
+
+6a) O(N^2) because insert() takes O(N), and for loop makes it O(N^2). The second for loop also takes the same time (O(N) for insert() times O(N) for the for loop), making it overall O(N^2).
+
+6b) O(N) becauses there's only one for loop (insertBefore() is constant time). The second for loop also takes the same time. Swap also only takes O(N).
+
+
+
+
+
+
+

@@ -1,0 +1,134 @@
+Game has everything dealing with the playing of the game
+Function:
+int digits(int num)
+	returns how many digits are in a number 
+	helps with offsetting score display
+
+
+
+Piece is a base class that helps with outputting orientation strings
+Functions:
+
+std::string feed() const;
+	returns the current orientation string of a piece
+	const because it doesn't change anything, only outputs
+
+std::string feedNextOrientation() const;
+	returns next orientation string of a piece. Useful for checking if rotating is allowed without actually changing the orientation
+	const because it doesn't change anything, only outputs
+
+void changeOrientation();
+	officially changes the orientation number and changes string accordingly
+
+
+virtual std::string orientations(int orientation) const = 0;
+	returns orientation string of inputted orientation number
+	pure virtual because every piece has a different orientations
+
+virtual int getID() const = 0;
+	returns piece's unique ID number according to the Enum PieceType
+	only actually used to determine whether or not a piece is a special piece or not though
+	pure virtual because every piece has a different ID
+
+
+
+
+
+
+
+iPiece, lPiece, jPiece, tPiece, oPiece, sPiece, zPiece, vaporBomb, foamBomb and crazyShape are all derived classes of Piece. These classes just hold onto the Orientaitions and ID of the piece.
+Functions:
+
+int getID() const;
+	returns ID number depending on what type of piece it is
+	const because it doesn't change anything, only outputs
+
+std::string orientations(int orientation) const;
+	returns orientation string of inputted orientation number
+	const because it doesn't change anything
+
+
+
+
+
+
+Well is used for pretty much everything. Movement and interactions all go here
+Functions:
+
+void displayWell(Screen& screen, int x, int y) const;
+	displays the @ symbols around the well
+	const because it doesn't change anything
+
+void displayInsides(Screen& screen, int x, int y) const;
+	actually displays the things inside the well
+	const because it doesn't change anyhting
+
+bool displayNext(Screen& screen, int x, int y) const;
+	displays the next block only if it's not the beginning
+	returns false if still beginning
+	returns true if game has started
+
+Main functions:
+bool drop();
+	solidifies() the piece that just finished (if not the first piece)
+	Next piece is now the Current piece
+	chooses() a new Next piece
+	"drops" (displays) current piece
+	deturns false if can't "drop" piece, indicating end of game
+
+int go(char key = 's');
+	swaps left and right inputs if the piece is a crazyShape
+	tries to move piece according to what key is inputted 
+	by first checking() if that move is allowed, and placing() it if it is
+	shifts piece down by default
+	returns 0 if successful shift down
+	returns 1 if successful move other than shifting down
+	returns -1 if lands
+	returns -2 if unable to move (wall or other object)
+	returns -3 if key other than designated key is inputted
+
+Helper functions:
+void choose();
+	chooses Next piece using chooseRandomPieceType();
+    
+bool check(std::string str, int x, int y) const;
+	checks if inputted str is able to be moved into current postion + x and y
+	const because it doesn't actually change anything
+      
+void place(std::string str, int x, int y);
+    actually places inputted str into the Well at current position + x and y
+    usually works together with check
+
+void solidify(std::string str);
+	if vaporBomb, vaporize 
+	if foamBomb, foam()
+	otherwise turns str into $ inside Well
+
+void foam(int x, int y);
+    recursion function for solidifying foamBomb
+
+void clearWell();
+    clears everything for new level
+
+int clearRows();
+    clears rows and returns how many were cleared
+
+
+
+
+
+
+
+
+Design decisions:
+Added an extra BUFFer of array spaces on the left side of the Well so that I won't have a problem walking off array if a piece goes against the left wall
+
+Pieces are represented with strings of length 16 because they can be returned
+
+Added option to turn off Special blocks and Levels. Just for fun
+
+Honestly, getID() and the whole ID concept is really extra. But it can be useful if other things were to be added
+
+If score, level or rows left exceeds a certain number, it will overlap the text. I didn't do anything about it though, since there's probably no human way it will actually exceed that
+
+

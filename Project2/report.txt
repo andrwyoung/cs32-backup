@@ -1,0 +1,247 @@
+This Sequence was implemented with a double linked list. Each node in this linked list has a value and 2 pointers. Each Node, except for the Node(s) on the end which point to a nullptr, point to the Node before it and after it. Thus for a single item node, the Node points to 2 nullptrs.
+
+A pointer keeps track of the "head" of the list and a pointer keeps track of the "tail" of the list. Therefore both pointers are nullptrs when the the list is empty. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sequence::Sequence(const Sequence& other)
+{
+    loop through other sequence
+    {
+        insert value into new sequence
+    }
+}
+Sequence::Sequence& operator=(const Sequence& other)
+{
+    if other sequence != current sequence
+    {
+        Sequence temp(other)
+        swap(temp)
+    }
+
+    return *this;
+}
+
+Sequence::~Sequence()
+{
+    walk through sequence
+    {
+        delete Node behind
+    }
+
+    delete tail
+}
+
+bool Sequence::insert(int pos, const ItemType& value)
+{
+    check if valid position
+
+    if empty sequence
+    {
+        new node
+        pointer stuff
+    }
+
+    if inserting in beginning
+    {
+        new node
+        pointer stuff
+    }   
+
+    if inserting in back
+    {
+        new node
+        pointer stuff
+    }
+
+    if inserting in middle
+    {
+        go to Node before pos
+        new node
+        pointer stuff
+    }
+}
+
+bool Sequence::erase(int pos)
+{
+    check if valid position
+
+    if empty sequence
+    {
+        delete node
+        pointer stuff
+    }
+
+    if inserting in beginning
+    {
+        if one item sequence
+        {
+            delete node
+            pointer stuff
+        }
+        else
+        {
+            delete node
+            pointer stuff
+        }
+        
+    }   
+
+    if inserting in back
+    {
+        delete node
+        pointer stuff
+    }
+
+    if inserting in middle
+    {
+        go to Node
+        delete node
+        pointer stuff
+    }
+}
+
+int Sequence::remove(const ItemType& value)
+{
+    counter = 0;
+
+    Node* walker;
+    while walker != nullptr
+    {
+        if walker's value == value
+        {
+            erase() it
+            start over from m_head
+        }
+        else
+        {
+            move to next value
+        }
+    }
+}
+
+void Sequence::swap(Sequence& other)
+{
+    swap pointers
+}
+
+int subsequence(const Sequence& seq1, const Sequence& seq2)
+{
+    result = -1;
+    loop through whole loop (int i = 0)
+    {
+        if seq1 item i = seq2 item 1
+        {
+            placeholder = i
+
+            loop through rest of seq2 (int j = 0)
+            {
+                if seq1 item i + j = seq2 item j
+                {
+                    failed comparision: result back to -1
+                }
+            }
+
+            if result != 1
+            {
+                return result;
+            }
+        }
+
+    }
+    return result (which should be -1);
+}
+
+
+void interleave(const Sequence& seq1, const Sequence& seq2, Sequence& result)
+{
+    Sequence temp;
+
+    loop through until i >= both seq1 and seq2 (int i = 0)
+    {
+        if i < seq1.size()
+        {
+            add seq1 item i to temp
+        }
+        if i < seq2.size()
+        {
+            add seq2 item i to temp
+        }
+    }
+
+    result = temp;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+All tests were preformed on a sequence of int
+
+Sequence h; //create
+assert(h.empty()); //make sure it's empty
+assert(h.insert(0, 10)); //insert something in beginning 
+assert(!h.empty()); //make sure it's NOT empty now
+assert(h.insert(1, 15)); //insert something in end
+assert(h.insert(1, 20)); //insert something in middle
+assert(h.insert(1, 30)); //insert something else in middle
+assert(h.size() == 4); //make sure size is 4 now that 4 things were inserted
+
+ItemType value; 
+assert(h.get(0, value)); //make sure get works on something
+assert(value == 10); //make sure it actually got it
+
+assert(h.insert(25)); //insert using other input function
+assert(h.insert(100));
+
+assert(h.set(0, 100)); //set something 
+assert(h.set(2, 100));
+assert(h.get(0, value));
+assert(value == 100); //make sure set works
+
+assert(h.remove(100) == 3); //make sure remove works
+ 
+Sequence i(h); //create an alternative sequence using copy constructor
+assert(i.insert(0, 20)); //add some more stuff. 
+assert(i.insert(0, 100)); //h is therefore a subsequence of i now
+
+std::cerr << subsequence(i, h) << '\n'; //check subsequence and show that h is subsequence of i
+
+Sequence j;
+interleave(i, h, j); //interleave i and h into j
+
+
+//folowing test is independant of above tests
+Sequence i; 
+assert(i.insert(0, 1));
+i.swap(h); //test swap
+
+i.dump(); //show that it works
+h.dump();
+
+std::cerr << "All tests passed\n";

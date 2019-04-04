@@ -1,0 +1,119 @@
+1a)
+		 	           50
+
+		    20                    60
+
+	  10         40          __         70
+
+  __   15     30    __   __     __   65    80
+
+__ __ __ __ 25 37 __ __ __ __ __ __ __ __ 73 __
+
+
+
+
+1b)
+in-order: 10 15 20 25 30 37 40 50 60 65 70 73 80
+pre-order: 50 20 10 15 40 30 25 37 60 70 65 80 73
+post-order: 15 10 25 37 30 40 20 65 73 80 70 60 50
+
+
+
+1c)
+deleting 30:
+
+		 	           50
+
+		    20                    60
+
+	  10         40          __         70
+
+  __   15     37    __   __     __   65    80
+
+__ __ __ __ 25 __ __ __ __ __ __ __ __ __ 73 __
+
+
+
+deleting 20:
+
+		 	           50
+
+		    25                    60
+
+	  10         40          __         70
+
+  __   15     37    __   __     __   65    80
+
+__ __ __ __ __ __ __ __ __ __ __ __ __ __ 73 __
+
+
+
+
+
+2a)
+struct Noooode
+{
+	int m_value
+
+	Noooode* m_parent;
+	Noooode* m_right;
+	Noooode* m_left;
+
+};
+
+
+
+
+2b)
+void insert(Noooode* current, int value, Noooode* parent = nullptr)
+{
+	if(current == nullptr)
+		//implied that it's at the bottom
+	{
+		make new Noooode with: 
+			m_value = value, 
+			m_parent = parent
+			m_left and m_right = nullptr;
+	}
+	else if(current's value < value)
+	{
+		insert(current's left Noooode, value, current)
+	}
+	else
+		//implied that current's value >= value
+	{
+		insert(current's right Noooode, value, current)
+	}
+}
+
+
+
+3a)
+   8
+ 3   6
+0 2 4 _
+
+item = 9
+
+
+3b) 8 3 6 0 2 4
+3c) 6 3 4 0 2
+
+
+
+4a) O(C + S) 
+4b) O(log(C) + S)
+4c) O(log(C) + log(S))
+4d) O(log(S))
+4e) O(1)
+4f) O(log(C) + S)
+4g) O(S)
+4h) O(C * log(S))
+
+
+
+
+
+
+
+
